@@ -2,6 +2,8 @@
 
 Capacitor adapter for cheap USB scales like Dymo M10
 
+Check full documentation here: [opensource.duma.sh/libraries/capacitor/usb-scale](https://opensource.duma.sh/libraries/capacitor/usb-scale)
+
 ## Install
 
 ```bash
