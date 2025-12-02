@@ -1,10 +1,6 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type {
-  EnumerateDevicesResponse,
-  USBScalePlugin
-} from './definitions';
-import {HasPermissionResponse} from "./definitions";
+import type { EnumerateDevicesResponse, USBScalePlugin, HasPermissionResponse } from './definitions';
 
 export class USBScaleWeb extends WebPlugin implements USBScalePlugin {
   enumerateDevices(): Promise<EnumerateDevicesResponse> {

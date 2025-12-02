@@ -1,12 +1,13 @@
 package dev.duma.android.usbscale.broadcastreceiver;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
+
+import androidx.core.content.ContextCompat;
 
 import java.util.Objects;
 
@@ -61,13 +62,12 @@ public class USBScaleBroadcastReceiver implements IUSBScaleBroadcastReceiver {
     }
 
     @Override
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     public void register() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
 
-        context.registerReceiver(receiver, filter);
+        ContextCompat.registerReceiver(context, receiver, filter, ContextCompat.RECEIVER_EXPORTED);
     }
 
     @Override

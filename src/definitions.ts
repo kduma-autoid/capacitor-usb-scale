@@ -53,19 +53,19 @@ export interface USBDevice {
   vid: number;
   pid: number;
   serial?: string;
-  product: { manufacturer: string, name: string };
+  product: { manufacturer: string; name: string };
 }
 
 export enum ScaleStatus {
-  Fault = "fault",
-  Zero = "zero",
-  InMotion = "in-motion",
-  Stable = "stable",
-  UnderZero = "under-zero",
-  OverWeight = "over-weight",
-  NeedCalibration = "need-calibration",
-  NeedZeroing = "need-zeroing",
-  Unknown = "unknown",
+  Fault = 'fault',
+  Zero = 'zero',
+  InMotion = 'in-motion',
+  Stable = 'stable',
+  UnderZero = 'under-zero',
+  OverWeight = 'over-weight',
+  NeedCalibration = 'need-calibration',
+  NeedZeroing = 'need-zeroing',
+  Unknown = 'unknown',
 }
 
 export interface USBScalePlugin {
@@ -101,25 +101,22 @@ export interface USBScalePlugin {
   /**
    * Event emitted when the scale sends data
    */
-  addListener(
-      eventName: 'onRead',
-      listenerFunc: (event: OnReadEvent) => void,
-  ): Promise<PluginListenerHandle>;
+  addListener(eventName: 'onRead', listenerFunc: (event: OnReadEvent) => void): Promise<PluginListenerHandle>;
 
   /**
    * Event emitted when a compatible USB scale device is connected.
    */
   addListener(
-      eventName: 'onScaleConnected',
-      listenerFunc: (event: OnScaleConnectedEvent) => void,
+    eventName: 'onScaleConnected',
+    listenerFunc: (event: OnScaleConnectedEvent) => void,
   ): Promise<PluginListenerHandle>;
 
   /**
    * Event emitted when a compatible USB scale device is disconnected.
    */
   addListener(
-      eventName: 'onScaleDisconnected',
-      listenerFunc: (event: OnScaleDisconnectedEvent) => void,
+    eventName: 'onScaleDisconnected',
+    listenerFunc: (event: OnScaleDisconnectedEvent) => void,
   ): Promise<PluginListenerHandle>;
 
   /**

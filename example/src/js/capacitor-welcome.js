@@ -1,9 +1,9 @@
 import { SplashScreen } from '@capacitor/splash-screen';
 import { USBScale } from '@kduma-autoid/capacitor-usb-scale';
-import { WebViewWatchDog } from "@kduma-autoid/capacitor-webview-watchdog";
+import { WebViewWatchDog } from '@kduma-autoid/capacitor-webview-watchdog';
 
-import { ScaleStatus } from "../../../src";
-import {App} from "@capacitor/app";
+import { ScaleStatus } from '../../../src';
+import { App } from '@capacitor/app';
 
 window.customElements.define(
   'capacitor-welcome',
@@ -88,7 +88,11 @@ window.customElements.define(
 
         const devices = await USBScale.enumerateDevices();
 
-        output.innerHTML = "<b>enumerateDevices():</b><br><pre><code>" + JSON.stringify(devices, null, 3) + "</code></pre><hr>" + output.innerHTML;
+        output.innerHTML =
+          '<b>enumerateDevices():</b><br><pre><code>' +
+          JSON.stringify(devices, null, 3) +
+          '</code></pre><hr>' +
+          output.innerHTML;
       });
 
       self.shadowRoot.querySelector('#request').addEventListener('click', async function (e) {
@@ -96,9 +100,17 @@ window.customElements.define(
 
         try {
           const request = await USBScale.requestPermission();
-          output.innerHTML = "<b>requestPermission():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>requestPermission():</b><br><pre><code>' +
+            JSON.stringify(request, null, 3) +
+            '</code></pre><hr>' +
+            output.innerHTML;
         } catch (err) {
-          output.innerHTML = "<b>requestPermission() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>requestPermission() - EXCEPTION!:</b><br><pre><code>' +
+            err.message +
+            '</code></pre><hr>' +
+            output.innerHTML;
         }
       });
 
@@ -107,37 +119,52 @@ window.customElements.define(
 
         try {
           const request = await USBScale.hasPermission();
-          output.innerHTML = "<b>hasPermission():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>hasPermission():</b><br><pre><code>' +
+            JSON.stringify(request, null, 3) +
+            '</code></pre><hr>' +
+            output.innerHTML;
         } catch (err) {
-          output.innerHTML = "<b>hasPermission() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>hasPermission() - EXCEPTION!:</b><br><pre><code>' +
+            err.message +
+            '</code></pre><hr>' +
+            output.innerHTML;
         }
       });
 
       self.shadowRoot.querySelector('#open').addEventListener('click', async function (e) {
         const output = self.shadowRoot.querySelector('#output');
-        self.shadowRoot.querySelector('#weight').innerHTML = "- g";
+        self.shadowRoot.querySelector('#weight').innerHTML = '- g';
 
         try {
           const request = await USBScale.open();
-          output.innerHTML = "<b>open():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>open():</b><br><pre><code>' + JSON.stringify(request, null, 3) + '</code></pre><hr>' + output.innerHTML;
         } catch (err) {
-          output.innerHTML = "<b>open() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>open() - EXCEPTION!:</b><br><pre><code>' + err.message + '</code></pre><hr>' + output.innerHTML;
         }
       });
 
       self.shadowRoot.querySelector('#close').addEventListener('click', async function (e) {
         const output = self.shadowRoot.querySelector('#output');
-        self.shadowRoot.querySelector('#weight').innerHTML = "- g";
+        self.shadowRoot.querySelector('#weight').innerHTML = '- g';
 
         try {
           const request = await USBScale.close();
-          output.innerHTML = "<b>close():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>close():</b><br><pre><code>' +
+            JSON.stringify(request, null, 3) +
+            '</code></pre><hr>' +
+            output.innerHTML;
         } catch (err) {
-          output.innerHTML = "<b>close() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+          output.innerHTML =
+            '<b>close() - EXCEPTION!:</b><br><pre><code>' + err.message + '</code></pre><hr>' + output.innerHTML;
         }
       });
 
-      USBScale.addListener('onRead', function(e) {
+      USBScale.addListener('onRead', function (e) {
         const output = self.shadowRoot.querySelector('#output');
         output.innerHTML = '<b>onRead:</b><br><pre>' + JSON.stringify(e, null, 3) + '</pre><hr>' + output.innerHTML;
 
@@ -150,24 +177,34 @@ window.customElements.define(
         }
       });
 
-      USBScale.addListener('onScaleDisconnected', function(e) {
+      USBScale.addListener('onScaleDisconnected', function (e) {
         const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>onScaleDisconnected:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+        output.innerHTML =
+          '<b>onScaleDisconnected:</b><br><pre>' + JSON.stringify(e, null, 3) + '</pre><hr>' + output.innerHTML;
 
-        self.shadowRoot.querySelector('#weight').innerHTML = "- g";
+        self.shadowRoot.querySelector('#weight').innerHTML = '- g';
       });
 
       USBScale.addListener('onScaleConnected', async function (e) {
         const output = self.shadowRoot.querySelector('#output');
-        output.innerHTML = "<b>onScaleConnected:</b><br><pre>" + JSON.stringify(e, null, 3) + "</pre><hr>" + output.innerHTML;
+        output.innerHTML =
+          '<b>onScaleConnected:</b><br><pre>' + JSON.stringify(e, null, 3) + '</pre><hr>' + output.innerHTML;
 
         let p = await USBScale.hasPermission();
-        if(p.permission) {
+        if (p.permission) {
           try {
             const request = await USBScale.open();
-            output.innerHTML = "<b>onScaleConnected -> open():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+            output.innerHTML =
+              '<b>onScaleConnected -> open():</b><br><pre><code>' +
+              JSON.stringify(request, null, 3) +
+              '</code></pre><hr>' +
+              output.innerHTML;
           } catch (err) {
-            output.innerHTML = "<b>onScaleConnected -> open() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+            output.innerHTML =
+              '<b>onScaleConnected -> open() - EXCEPTION!:</b><br><pre><code>' +
+              err.message +
+              '</code></pre><hr>' +
+              output.innerHTML;
           }
           return;
         }
@@ -176,20 +213,30 @@ window.customElements.define(
           await listener.remove();
 
           let p = await USBScale.hasPermission();
-          if(p.permission) {
+          if (p.permission) {
             try {
               const request = await USBScale.open();
-              output.innerHTML = "<b>onScaleConnected -> resume -> open():</b><br><pre><code>" + JSON.stringify(request, null, 3) + "</code></pre><hr>" + output.innerHTML;
+              output.innerHTML =
+                '<b>onScaleConnected -> resume -> open():</b><br><pre><code>' +
+                JSON.stringify(request, null, 3) +
+                '</code></pre><hr>' +
+                output.innerHTML;
             } catch (err) {
-              output.innerHTML = "<b>onScaleConnected -> resume -> open() - EXCEPTION!:</b><br><pre><code>" + err.message + "</code></pre><hr>" + output.innerHTML;
+              output.innerHTML =
+                '<b>onScaleConnected -> resume -> open() - EXCEPTION!:</b><br><pre><code>' +
+                err.message +
+                '</code></pre><hr>' +
+                output.innerHTML;
             }
           } else {
-            output.innerHTML = "<b>onScaleConnected -> resume:</b><br><pre><code>No permissions given.</code></pre><hr>" + output.innerHTML;
+            output.innerHTML =
+              '<b>onScaleConnected -> resume:</b><br><pre><code>No permissions given.</code></pre><hr>' +
+              output.innerHTML;
           }
         });
       });
     }
-  }
+  },
 );
 
 window.customElements.define(
@@ -218,5 +265,5 @@ window.customElements.define(
     <slot></slot>
     `;
     }
-  }
+  },
 );
